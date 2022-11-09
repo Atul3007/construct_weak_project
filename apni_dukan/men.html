@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mens fashion</title>
+    <style>
+       #container {
+            height: auto;
+            margin: 3%;
+
+        }
+
+        #nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1%;
+            background-color: antiquewhite;
+        }
+
+        img {
+            width: 200px;
+        }
+
+        #nav2 {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 1%;
+            background-color: rgb(250, 214, 167);
+        }
+        #nav3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1%;
+            background-color: rgb(168, 140, 104);
+        }
+        #products{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 5px;
+            margin-left:5%;
+        }
+        #products>div{
+            text-align: center;
+        }
+        a:hover{
+            cursor: pointer;
+        }
+        img:hover{
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="nav">
+            <img src="C:\Users\HP\OneDrive\Desktop\Apni.png" alt="">
+            <a style="color:black ;" href="women.html">Women</a>
+            <a style="color:black ;" href="men.html">Men</a>
+            <input onchange="search()" style="width:500px;border: 0ch;" type="text" placeholder="search item here">
+            <a style="color:black ;" href="profile.html">Profile</a>
+            <a style="color:black ;" href="cart.html">Cart</a>
+            <a style="color:black ;" href="Liked.html">Liked Items</a>
+        </div>
+        <div id="nav2">
+            <a style="color:black ;" href="Sale.html">Sale</a>
+            <a style="color:black ;" href="New_in.html">New in</a>
+            <a style="color:black ;" href="Shoes.html">Shoes</a>
+            <a style="color:black ;" href="Sports.html">Sports Wear</a>
+            <a style="color:black ;" href="Accessories.html">Accessories</a>
+        </div>
+        <div id="nav3">
+            <a style="color:black ;" href="women.html">Women</a>
+            <h2>30% off everything. Use code JUST4U!</h2>
+            <a style="color:black ;" href="men.html">Men</a>
+        </div>
+    </div>
+    <div id="products">
+
+    </div>
+</body>
+
+</html>
+<script>
+    let bag=[];
+    async function display() {
+        try {
+            let res = await fetch("https://636b54b2ad62451f9fae93b8.mockapi.io/products");
+            let data = await res.json();
+            display_data(data);
+            bag=data;
+        } catch (err) {
+            alert("Error");
+        }
+    }
+    function search(){
+        let value=document.querySelector("input").value;
+        let filterdata=bag.filter(function(element){
+            return element.desc.toLowerCase().includes(value.toLocaleLowerCase());
+        })
+        display_data(filterdata);
+    }
+    function display_data(array) {
+        document.querySelector("#products").innerHTML="";
+        array.forEach(element => {
+            let div = document.createElement("div");
+            let img = document.createElement("img");
+            img.setAttribute("src", element.avatar);
+            img.addEventListener("click",function(){
+                alert("Item added to liked items");
+                add_data("added_item",element);
+            })
+            let details = document.createElement("h5");
+            details.innerText = element.desc;
+            let price = document.createElement("h1");
+            price.innerText = "$" + element.price;
+            div.append(img, details, price);
+            document.querySelector("#products").append(div);
+        });
+    }
+    function add_data(key,values){
+        let new_data=JSON.parse(localStorage.getItem(key))||[];
+        new_data.push(values);
+        localStorage.setItem(key,JSON.stringify(new_data));
+    }
+    display(); 
+</script>

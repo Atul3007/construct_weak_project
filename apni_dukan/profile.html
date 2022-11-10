@@ -7,7 +7,41 @@
     <title>Profile</title>
 </head>
 <body>
-    <h2>Login</h2>
-    
+        <h2>Login</h2>
+            <table>
+                <tr>
+                    <td>Mobile</td>
+                    <td> <input id="number" type="number" placeholder="enter mobile number"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td> <input id="pass" type="password" placeholder="enter password"> </td>
+                </tr>
+            </table>
+        <button>Login</button>
+    <h4>If not have an account please</h4>
+    <a style="color:red ;" href="signup.html">signup</a>
 </body>
 </html>
+<script>
+     let data=JSON.parse(localStorage.getItem("arr"));
+     let mob1="";
+     let pass="";
+     document.querySelector("button").addEventListener("click",compare(data));
+    function compare(array){
+        array.forEach(element => {
+           mob1=(element.mobile);
+           pass=element.pass1;
+        });
+     }
+     document.querySelector("button").addEventListener("click",function(){
+        let mobile = document.querySelector("#number").value;
+        let password = document.querySelector("#pass").value;
+          if(mobile===mob1 && pass===password){
+            alert("Login successfull!")
+          }else{
+            alert("Login Failed");
+          }
+     })
+   
+</script>

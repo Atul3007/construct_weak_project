@@ -9,8 +9,7 @@
     <style>
        #container {
             height: auto;
-            margin: 3%;
-
+            align-items: center;            
         }
 
         #nav {
@@ -54,6 +53,9 @@
         img:hover{
             cursor: pointer;
         }
+        #select{
+            align-items: center;
+        }
     </style>
 </head>
 
@@ -81,6 +83,14 @@
             <a style="color:black ;" href="men.html">Men</a>
         </div>
     </div>
+    <h1 style="text-align: center;">BEST SELLERS</h1>
+    <p style="text-align: center;">
+        <select onchange="select()" name="" id="select">
+            <option value="Filter">Filter by price</option>
+            <option value="Low To High">Low To High</option>
+            <option value="High To Low">High To Low</option>
+        </select>
+    </p>
     <div id="products">
 
     </div>
@@ -98,6 +108,19 @@
         } catch (err) {
             alert("Error");
         }
+    }
+    function select(){
+        let value=document.querySelector("#select").value;
+        let filter = bag.filter(function(element){
+            if(value==="Low To High"){
+                let sort = (bag.sort((a,b)=>a.price-b.price));
+                display_data(sort);
+            }
+            else{
+                let sort = bag.sort((a,b)=>b.price-a.price);
+                display_data(sort);
+            }
+        })
     }
     function search(){
         let value=document.querySelector("input").value;

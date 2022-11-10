@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign in</title>
+</head>
+
+<body>
+    <h1>Sign Up Form</h1>
+    <div id="container">
+        <form action="">
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input id="name" type="text" placeholder="enter name"></td>
+                </tr>
+                <tr>
+                    <td>Mobile</td>
+                    <td><input id="mobile" type="number" placeholder="enter mobile""></td>
+                </tr>
+                <tr>
+                    <td>E-mail</td>
+                    <td><input id="mail" type="email" placeholder="enter mail"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input id="pass1" type="password" placeholder="Password"></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td> <input id="pass2" type="password" placeholder="Confirm Password"></td>
+                </tr>
+            </table>
+            <input type="submit">
+        </form>
+        <a style="color:red ;" href="profile.html">Log in</a>
+    </div>
+</body>
+
+</html>
+<script>
+    let form = document.querySelector("form");
+        let arr = JSON.parse(localStorage.getItem("arr")) || [];
+        form.addEventListener("submit", function () {
+            if(form.pass1.value===form.pass2.value){
+ let obj = {
+                name: form.name.value,
+                mobile: form.mobile.value,
+                mail: form.mail.value,
+                pass1: form.pass1.value,
+                pass2: form.pass2.value
+            }
+            arr.push(obj);
+            localStorage.setItem("arr", JSON.stringify(arr));
+            alert("Profile Successfully created");
+        } else{
+           alert("password does not match");
+}
+    })
+    
+</script>

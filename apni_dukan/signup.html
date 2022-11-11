@@ -53,11 +53,16 @@
                 pass1: form.pass1.value,
                 pass2: form.pass2.value
             }
-            arr.push(obj);
+            if(obj.name==""||obj.mail==""||obj.pass1==""||obj.pass2==""||obj.mobile==""){
+    alert("Please fill all sections");
+  }
+  else{
+    arr.push(obj);
             localStorage.setItem("arr", JSON.stringify(arr));
             alert("Profile Successfully created");
+  }
         } else{
-           alert("password does not match");
+           alert("Please re-enter the password");
 }
     })
     

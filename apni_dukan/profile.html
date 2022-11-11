@@ -25,23 +25,21 @@
 </html>
 <script>
      let data=JSON.parse(localStorage.getItem("arr"));
-     let mob1="";
-     let pass="";
-     document.querySelector("button").addEventListener("click",compare(data));
-    function compare(array){
-        array.forEach(element => {
-           mob1=(element.mobile);
-           pass=element.pass1;
-        });
-     }
      document.querySelector("button").addEventListener("click",function(){
-        let mobile = document.querySelector("#number").value;
-        let password = document.querySelector("#pass").value;
-          if(mobile===mob1 && pass===password){
-            alert("Login successfull!")
-          }else{
-            alert("Login Failed");
-          }
-     })
+      let count=0;
+      let mail = document.querySelector("#number").value;
+      let pass = document.querySelector("#pass").value;
+      for(let i=0;i<data.length;i++){
+        if(mail === data[i].mobile && pass === data[i].pass1){
+          count++;
+        }
+      }
+      if(count>0){
+      alert("Login successful");
+    }else{
+      alert("Login failed");
+    }
+    })
+    
    
 </script>

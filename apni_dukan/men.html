@@ -65,7 +65,7 @@
             <img src="C:\Users\HP\OneDrive\Desktop\Apni.png" alt="">
             <a style="color:black ;" href="women.html">Women</a>
             <a style="color:black ;" href="men.html">Men</a>
-            <input onchange="search()" style="width:500px;border: 0ch;" type="text" placeholder="search item here">
+            <input onchange="search()" style="width:500px;" type="text" placeholder="search item here">
             <a style="color:black ;" href="profile.html">Profile</a>
             <a style="color:black ;" href="cart.html">Cart</a>
             <a style="color:black ;" href="Liked.html">Liked Items</a>
@@ -105,6 +105,7 @@
             let data = await res.json();
             display_data(data);
             bag=data;
+            console.log(data)
         } catch (err) {
             alert("Error");
         }

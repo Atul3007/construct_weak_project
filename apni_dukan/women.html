@@ -1,30 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Women's items</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cart</title>
+    <title>Mens fashion</title>
     <style>
-        #product {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 5px;
-            margin-left: 5%;
-            margin-top: 5%;
-        }
-
-        #product>div {
-            text-align: center;
+       #container {
             height: auto;
-            width: auto;
-            justify-content: space-between;
-        }
-
-        #container {
-            height: auto;
-
+            align-items: center;            
         }
 
         #nav {
@@ -46,7 +40,6 @@
             padding: 1%;
             background-color: rgb(250, 214, 167);
         }
-
         #nav3 {
             display: flex;
             justify-content: space-between;
@@ -54,19 +47,22 @@
             padding: 1%;
             background-color: rgb(168, 140, 104);
         }
-
-        button {
-            border: 0ch;
-            color: palevioletred;
+        #products{
+            display: grid;
+            grid-template-columns: repeat(4,1fr);
+            gap: 5px;
+            margin-left:5%;
         }
-        button:hover{
-            cursor: pointer;
+        #products>div{
+            text-align: center;
         }
         a:hover{
             cursor: pointer;
         }
-        #info{
-            text-align: center;
+        img:hover{
+            cursor: pointer;
+        }
+        #select{
             align-items: center;
         }
     </style>
@@ -95,57 +91,81 @@
             <h2>30% off everything. Use code JUST4U!</h2>
             <a style="color:black ;" href="men.html">Men</a>
         </div>
-        <div id="info">
-            <h2 id="h2"></h2>
-            <h2 id="h1"></h2>
-            <button id="btn">Place Order</button>
-        </div>
-        <div id="product">
+    </div>
+    <h1 style="text-align: center;">BEST SELLERS</h1>
+    <p style="text-align: center;">
+        <select onchange="select()" name="" id="select">
+            <option value="Filter">Filter by price</option>
+            <option value="Low To High">Low To High</option>
+            <option value="High To Low">High To Low</option>
+        </select>
+    </p>
+    <div id="products">
 
-        </div>
+    </div>
 </body>
 
 </html>
 <script>
-    let data = JSON.parse(localStorage.getItem("cart_item"));
-    function search() {
-        let value = document.querySelector("input").value;
-        let filterdata = data.filter(function (element) {
+    let bag=[];
+    async function display() {
+        try {
+            let res = await fetch("https://636fcdf3f2ed5cb047e5d741.mockapi.io/product");
+            let data = await res.json();
+            display_data(data);
+            bag=data;
+            console.log(data)
+         } 
+        catch (err) {
+            alert(err);
+        }
+    }
+    function select(){
+        let value=document.querySelector("#select").value;
+        let filter = bag.filter(function(element){
+            if(value==="Low To High"){
+                let sort = (bag.sort((a,b)=>a.price-b.price));
+                display_data(sort);
+            }
+            else{
+                let sort = bag.sort((a,b)=>b.price-a.price);
+                display_data(sort);
+            }
+        })
+    }
+    function search(){
+        let value=document.querySelector("input").value;
+        let filterdata=bag.filter(function(element){
             return element.desc.toLowerCase().includes(value.toLocaleLowerCase());
         })
         display_data(filterdata);
     }
     function display_data(array) {
-        document.querySelector("#product").innerHTML = "";
-        array.forEach((element, index) => {
+        document.querySelector("#products").innerHTML="";
+        array.forEach(element => {
             let div = document.createElement("div");
             let img = document.createElement("img");
             img.setAttribute("src", element.avatar);
+            img.addEventListener("click",function(){
+                alert("Item added to liked items");
+                add_data("added_item",element);
+            })
+            let name = document.createElement("h3");
+            name.innerText=element.name;
             let details = document.createElement("h5");
-            details.innerText = element.desc;
+            details.innerText = element.detail;
             let price = document.createElement("h1");
             price.innerText = "$" + element.price;
-            let button = document.createElement("button");
-            button.innerText = "Delete"
-            button.addEventListener("click", function () {
-                delete_data(data, index);
-            })
-            div.append(img, details, price, button);
-            document.querySelector("#product").append(div);
-            document.querySelector("#h2").innerText = "Total number of items are " + (array.length);
-            let res = data.reduce((acc, element) => {
-                return acc + Number(element.price);
-            }, 0);
-           document.querySelector("#h1").innerText = "Total cost of items are $" + res; 
+            div.append(img,name,details, price);
+            document.querySelector("#products").append(div);
         });
     }
-    document.querySelector("#btn").addEventListener("click",function(){
-            alert("Order Placed");
-           }) 
-    function delete_data(data, index) {
-        data.splice(index, 1);
-        localStorage.setItem("cart_item", JSON.stringify(data));
-        display_data(data);
+    function add_data(key,values){
+        let new_data=JSON.parse(localStorage.getItem(key))||[];
+        new_data.push(values);
+        localStorage.setItem(key,JSON.stringify(new_data));
     }
-    display_data(data);
+    display(); 
 </script>
+</body>
+</html>

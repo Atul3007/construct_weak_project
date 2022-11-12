@@ -5,22 +5,35 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
+    <style>
+      body{
+        background-color: bisque;
+      }
+      #container{
+        margin-left: 40%;
+        display: block;
+        align-items: center;
+      }
+    </style>
 </head>
 <body>
-        <h2>Login</h2>
-            <table>
-                <tr>
-                    <td>Mobile</td>
-                    <td> <input id="number" type="number" placeholder="enter mobile number"></td>
-                </tr>
-                <tr>
-                    <td>Password</td>
-                    <td> <input id="pass" type="password" placeholder="enter password"> </td>
-                </tr>
-            </table>
-        <button>Login</button>
-    <h4>If not have an account please</h4>
-    <a style="color:red ;" href="signup.html">signup</a>
+  <div id="container">
+    <h1>Welcome to Apni Dukan</h1>
+    <h2>Login</h2>
+    <table>
+        <tr>
+            <td>Mobile</td>
+            <td> <input id="number" type="number" placeholder="enter mobile number"></td>
+        </tr>
+        <tr>
+            <td>Password</td>
+            <td> <input id="pass" type="password" placeholder="enter password"> </td>
+        </tr>
+    </table>
+<button>Login</button>
+<h4>If not have an account please</h4>
+<a style="color:red ;" href="signup.html">signup</a>
+  </div>
 </body>
 </html>
 <script>
@@ -36,8 +49,10 @@
       }
       if(count>0){
       alert("Login successful");
+      window.location.href = "index.html";
     }else{
       alert("Login failed");
+      window.location.href = "signup.html";
     }
     })
     

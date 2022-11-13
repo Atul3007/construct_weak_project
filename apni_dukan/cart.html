@@ -46,7 +46,9 @@
             padding: 1%;
             background-color: rgb(250, 214, 167);
         }
-
+        body{
+        background-color:rgb(255, 241, 241);
+      }
         #nav3 {
             display: flex;
             justify-content: space-between;
@@ -75,7 +77,7 @@
 <body>
     <div id="container">
         <div id="nav">
-            <img src="C:\Users\HP\OneDrive\Desktop\Apni.png" alt="">
+            <img src="file:///C:/Users/HP/OneDrive/Desktop/Apni.png" alt="">
             <a style="color:black ;" href="women.html">Women</a>
             <a style="color:black ;" href="men.html">Men</a>
             <input onchange="search()" style="width:500px;" type="text" placeholder="search item here">
@@ -98,6 +100,10 @@
         <div id="info">
             <h2 id="h2"></h2>
             <h2 id="h1"></h2>
+            <label for="">Coupon Code</label>
+            <input id="input" type="text" placeholder="enter coupon code">
+            <button id="coupon">Apply coupon</button>
+            <br>
             <button id="btn">Place Order</button>
         </div>
         <div id="product">
@@ -136,7 +142,20 @@
             let res = data.reduce((acc, element) => {
                 return acc + Number(element.price);
             }, 0);
-           document.querySelector("#h1").innerText = "Total cost of items are $" + res; 
+            document.querySelector("#h1").innerText = "Total cost of items are $" + res; 
+            document.querySelector("#coupon").addEventListener("click",function(){
+                let count=0;
+                let c = document.querySelector("#input").value;
+                if(c==="JUST4U"){
+                    document.querySelector("#h1").innerText = "Total cost of items are $" + res*.3; 
+                }else if(c!=="JUST4U"){
+                    count++;
+                }
+                if(count>0){
+                    alert("Incorrect coupon");
+                    console.log(count)
+                }
+            });
         });
     }
     document.querySelector("#btn").addEventListener("click",function(){

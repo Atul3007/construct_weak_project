@@ -6,20 +6,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <style>
+       #containers {
+            height: auto;
+            align-items: center;            
+        }
+
+        #nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1%;
+            background-color: antiquewhite;
+        }
+
+        img {
+            width: 200px;
+        }
+
+        #nav2 {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 1%;
+            background-color: rgb(250, 214, 167);
+        }
+        #nav3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1%;
+            background-color: rgb(168, 140, 104);
+        }
       body{
-        background-color: bisque;
+        background-color: rgb(255, 244, 245);
       }
       #container{
         margin-left: 40%;
         display: block;
         align-items: center;
-      }
+        width: 300px;
+        text-align: center;  
+          }
+          button{
+            border: 0ch;
+            color: palevioletred;
+        }
+        a:hover{
+            cursor: pointer;
+        }
+        button:hover{
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
+  <div id="containers">
+    <div id="nav">
+        <img src="C:\Users\HP\OneDrive\Desktop\Apni.png" alt="">
+        <a style="color:black ;" href="women.html">Women</a>
+        <a style="color:black ;" href="men.html">Men</a>
+        <input onchange="search()" style="width:500px;" type="text" placeholder="search item here">
+        <a style="color:black ;" href="profile.html">Profile</a>
+        <a style="color:black ;" href="cart.html">Cart</a>
+        <a style="color:black ;" href="Liked.html">Liked Items</a>
+    </div>
+    <div id="nav2">
+        <a style="color:black ;" href="Sale.html">Sale</a>
+        <a style="color:black ;" href="New_in.html">New in</a>
+        <a style="color:black ;" href="Shoes.html">Shoes</a>
+        <a style="color:black ;" href="Sports.html">Sports Wear</a>
+        <a style="color:black ;" href="Accessories.html">Accessories</a>
+    </div>
+    <div id="nav3">
+        <a style="color:black ;" href="women.html">Women</a>
+        <h2>30% off everything. Use code JUST4U!</h2>
+        <a style="color:black ;" href="men.html">Men</a>
+    </div>
+</div>
+<h1 style="text-align: center;">Welcome to Apni Dukan</h1>
+<h2 style="text-align:center ;">Login</h2>
   <div id="container">
-    <h1>Welcome to Apni Dukan</h1>
-    <h2>Login</h2>
+   
     <table>
         <tr>
             <td>Mobile</td>
@@ -30,7 +97,7 @@
             <td> <input id="pass" type="password" placeholder="enter password"> </td>
         </tr>
     </table>
-<button>Login</button>
+    <button>Login</button>
 <h4>If not have an account please</h4>
 <a style="color:red ;" href="signup.html">signup</a>
   </div>

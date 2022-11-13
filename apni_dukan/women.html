@@ -28,7 +28,13 @@
             padding: 1%;
             background-color: antiquewhite;
         }
-
+        button{
+            border: 0ch;
+            color: palevioletred;
+        }
+        body{
+        background-color:rgb(255, 241, 241);
+      }
         img {
             width: 200px;
         }
@@ -100,6 +106,7 @@
             <option value="High To Low">High To Low</option>
         </select>
     </p>
+    <h3 id="i" style="text-align:center ;"> Total number of items are 50</h3>
     <div id="products">
 
     </div>
@@ -114,7 +121,6 @@
             let data = await res.json();
             display_data(data);
             bag=data;
-            console.log(data)
          } 
         catch (err) {
             alert(err);
